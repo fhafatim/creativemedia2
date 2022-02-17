@@ -26,7 +26,7 @@
                     <thead>
                         <tr>
                             <th>No.</th>
-                            <th>No Pengajuan</th>
+                            <th>No.Surat</th>
                             <th>Nama</th>
                             <th>Jabatan</th>
                             <th>Divisi</th>
