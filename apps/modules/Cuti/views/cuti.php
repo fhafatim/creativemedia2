@@ -6,16 +6,12 @@
     }
 </style>
 
-
 <section class="content">
     <div class="box">
         <div class="box-header">
-
-
             <div class="col-md-2">
-                <a class="klik ajaxify" href="<?php echo site_url('add-daftar'); ?>"><button class="btn btn-success"><i class="glyphicon glyphicon-plus-sign"></i> Add Data</button></a>
+                <a href="<?php echo site_url('Laporan'); ?>" target="_blank"><button class=" btn btn-success"><i class="glyphicon glyphicon-plus-sign"></i> Add Data</button></a>
             </div>
-            -
         </div>
 
         <!-- /.box-header -->
