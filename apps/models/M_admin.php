@@ -19,3 +19,6 @@ class M_admin extends CI_Model {
 		return $data->row();
 	}
 }
+
+/* End of file M_admin.php */
+/* Location: ./application/models/M_admin.php */

@@ -228,16 +228,6 @@ class Trainer extends AUTH_Controller
 				$image_data = $this->upload->data();
 				$path['link'] = "upload/gambar/";
 
-				// $data2 = array(
-				// 	'kategori_login'		=> 'tentor',
-				// 	'username'				=> $this->input->post('username'),
-				// 	'password'				=>md5($this->input->post('password')),
-				// 	'status_login'			=> 'belum aktif',
-				// 	'created_date'			=> date('Y-m-d H:i:s'),
-				// 	'updated_date'			=> date('Y-m-d H:i:s')
-				// );
-				// $result = $this->db->insert('tbl_login',$data2);
-
 				$data = array(
 					//'id_login'			=> $this->db->insert_id(),
 					'nama_tentor'		=> $this->input->post('nama_tentor'),
@@ -304,11 +294,6 @@ class Trainer extends AUTH_Controller
 					'updated_date' 		=> date('Y-m-d H:i:s')
 				);
 				$result = $this->db->insert('tbl_tentor', $data);
-
-
-				// $result = $this->M_trainer->simpan_data($data);
-				// $result = $this->M_trainer->simpanLogin($data2);
-
 				if ($result > 0) {
 					$out['status'] = 'berhasil';
 				} else {

@@ -1,4 +1,4 @@
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 /*
 | -------------------------------------------------------------------------
 | URI ROUTING
@@ -40,7 +40,7 @@
 
 $route['default_controller'] = "Default/Auth";
 $route['404_override'] = '';
-$route['login'] 		= 'Default/Auth';
+$route['login']         = 'Default/Auth';
 $route['logout'] = 'Auth/logout';
 
 
@@ -220,6 +220,11 @@ $route['filter-data-honor'] = 'Support/Report_honor/filter';
 $route['artikel'] =   'Master/Artikel/index';
 $route['add-artikel'] = 'Master/Artikel/add';
 $route['edit-artikel/(:any)'] = 'Master/Artikel/edit/$1';
+
+/* route Cuti */
+$route['cuti'] =   'Cuti/Cuti/index';
+$route['add-cuti'] = 'Cuti/Cuti/add';
+
 
 
 
