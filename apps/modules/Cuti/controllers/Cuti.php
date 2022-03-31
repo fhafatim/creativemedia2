@@ -54,7 +54,7 @@ class Cuti extends AUTH_Controller
             $row[] = $cuti->status;
             $row[] =  anchor('edit-cuti/' . $cuti->no_surat, ' <span class="fa fa-edit"></span> ', ' class="btn btn-sm btn-primary ajaxify klik " ') .
                 '  <button class="btn btn-sm btn-danger hapus-cuti" data-id=' . "'" . $cuti->no_surat . "'" . '><i class="glyphicon glyphicon-trash"></i></button> ' .
-                anchor('list-sertifikat-cuti/' . $cuti->no_surat, ' <span class="fa fa-book"></span> ', ' class="btn btn-sm btn-primary ajaxify klik " ');
+                anchor('edit-cuti/' . $cuti->no_surat, ' <span class="fa fa-book"></span> ', ' class="btn btn-sm btn-primary ajaxify klik " ');
             $data[] = $row;
         }
 
@@ -92,9 +92,9 @@ class Cuti extends AUTH_Controller
 
             $this->load->library('upload', $config);
 
-            if ($this->upload->do_upload("lampiran")) {
+            if ($this->upload->do_upload("gambar")) {
                 $image_data = $this->upload->data();
-                $path['link'] = "./upload/lampiran/";
+                $path['link'] = "upload/lampiran/";
 
                 $data = array(
                     //'id_login'			=> $this->db->insert_id(),
@@ -116,8 +116,8 @@ class Cuti extends AUTH_Controller
                     $out['status'] = 'gagal';
                 }
             } else {
+                $out['error'] = $this->upload->display_errors();
                 $data = array(
-                    //'id_login'			=> $this->db->insert_id(),
                     'no_surat'        => $this->input->post('no_surat'),
                     'nama'        => $this->input->post('nama'),
                     'jabatan'        => $this->input->post('jabatan'),
@@ -157,5 +157,111 @@ class Cuti extends AUTH_Controller
             $data['judul']         = "Tambah Data Cuti";
             $this->loadkonten('v_tambah/tambah', $data);
         }
+    }
+
+    public function Edit($id)
+    {
+
+        /*ini harus ada boss */
+        $data['userdata'] = $this->userdata;
+        $access = $this->M_sidebar->access('edit', 'cuti');
+        if ($access->menuview == 0) {
+            $data['page']         = "Data Cuti";
+            $data['judul']         = "Data Cuti";
+            $this->loadkonten('Dashboard/layouts/no_akses', $data);
+        }
+        /*ini harus ada boss */ else {
+
+            $where = array('no_surat' => $id);
+            $data['datacuti']  = $this->M_cuti->select_by_id($id);
+
+            $data['page']         = "Data Cuti";
+            $data['judul']         = "Data Cuti";
+            $this->loadkonten('v_tambah/edit', $data);
+        }
+    }
+
+    public function prosesUpdate()
+    {
+
+        $config['upload_path'] = "./upload/gambar/";
+        $config['allowed_types'] = 'gif|jpg|png';
+        $config['max_size'] = '2048'; //maksimum besar file 2M
+        $config['overwrite'] = TRUE;
+
+        $this->load->library('upload', $config);
+
+        if ($this->upload->do_upload("gambar")) {
+            $image_data = $this->upload->data();
+            $path['link'] = "upload/gambar/";
+
+            $where = array(
+                'id_tentor'            => $this->input->post('id_tentor')
+            );
+
+            $data = array(
+                'nama_tentor'            => $this->input->post('nama_tentor'),
+                'bidang_studi'            => implode(",", $this->input->post('bidang_studi')),
+                'ktp'                    => $this->input->post('ktp'),
+                'jenis_kelamin'           => $this->input->post('jenis_kelamin'),
+                'tempat_lahir'           => $this->input->post('tempat_lahir'),
+                'tanggal_lahir'           => date('Y-m-d', strtotime($this->input->post('tanggal_lahir'))),
+                'alamat'                => $this->input->post('alamat'),
+                'kota'                    => $this->input->post('kota'),
+                'provinsi'                => $this->input->post('provinsi'),
+                'telepon'                => $this->input->post('telepon'),
+                'telepon_alternatif'   => $this->input->post('telepon_alternatif'),
+                'pendidikan'           => $this->input->post('pendidikan'),
+                'lembaga_pendidikan'   => $this->input->post('lembaga_pendidikan'),
+                'tahun_lulus'           => $this->input->post('tahun_lulus'),
+                'tanggal_masuk'           => date('Y-m-d', strtotime($this->input->post('tanggal_masuk'))),
+                'gambar'               => $path['link'] . '' . $image_data['file_name'],
+                'status_tentor'        => $this->input->post('status_tentor'),
+                'updated_date'           => date('Y-m-d H:i:s')
+            );
+
+            $result = $this->M_trainer->update($data, $where);
+
+            if ($result > 0) {
+                $out['status'] = 'berhasil';
+            } else {
+                $out['status'] = 'gagal';
+            }
+        } else {
+
+            $where = array(
+                'id_tentor'            => $this->input->post('id_tentor')
+            );
+
+            $data = array(
+                'nama_tentor'            => $this->input->post('nama_tentor'),
+                'bidang_studi'            => implode(",", $this->input->post('bidang_studi')),
+                'ktp'                    => $this->input->post('ktp'),
+                'jenis_kelamin'           => $this->input->post('jenis_kelamin'),
+                'tempat_lahir'           => $this->input->post('tempat_lahir'),
+                'tanggal_lahir'           => date('Y-m-d', strtotime($this->input->post('tanggal_lahir'))),
+                'alamat'                => $this->input->post('alamat'),
+                'kota'                    => $this->input->post('kota'),
+                'provinsi'                => $this->input->post('provinsi'),
+                'telepon'                => $this->input->post('telepon'),
+                'telepon_alternatif'   => $this->input->post('telepon_alternatif'),
+                'pendidikan'           => $this->input->post('pendidikan'),
+                'lembaga_pendidikan'   => $this->input->post('lembaga_pendidikan'),
+                'tahun_lulus'           => $this->input->post('tahun_lulus'),
+                'tanggal_masuk'           => date('Y-m-d', strtotime($this->input->post('tanggal_masuk'))),
+                'status_tentor'        => $this->input->post('status_tentor'),
+                'updated_date'           => date('Y-m-d H:i:s')
+            );
+
+            $result = $this->M_trainer->update($data, $where);
+
+            if ($result > 0) {
+                $out['status'] = 'berhasil';
+            } else {
+                $out['status'] = 'gagal';
+            }
+        }
+
+        echo json_encode($out);
     }
 }

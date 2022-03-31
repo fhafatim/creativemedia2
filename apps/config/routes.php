@@ -224,6 +224,7 @@ $route['edit-artikel/(:any)'] = 'Master/Artikel/edit/$1';
 /* route Cuti */
 $route['cuti'] =   'Cuti/Cuti/index';
 $route['add-cuti'] = 'Cuti/Cuti/add';
+$route['edit-cuti/(:any)'] = 'Cuti/Cuti/edit/$1';
 
 
 

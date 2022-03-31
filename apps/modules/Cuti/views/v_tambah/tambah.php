@@ -26,7 +26,7 @@
         <!-- style loading -->
         <div class="loading2"></div>
         <!-- -->
-        <form class="form-horizontal" id="form-tambah" method="POST">
+        <form class="form-horizontal" id="form-tambah" enctype="multipart/form-data" method="POST">
             <div class="row">
                 <div class="col-md-12">
                     <div class="nav-tabs-custom">
@@ -120,9 +120,9 @@
                                         <img class="img-thumbnail" id="output" src="<?php echo base_url(); ?>/assets/tambahan/gambar/tidak-ada.png" alt="your image" />
                                     </div>
 
-                                    <label for="inputFoto" class="col-sm-2 control-label">Lampiran</label>
+                                    <label for="inputFoto" class="col-sm-2 control-label">Foto</label>
                                     <div class="col-sm-8">
-                                        <input type="file" class="form-control" name="lampiran" id="lampiran" />
+                                        <input type="file" class="form-control" name="gambar" id="gambar" />
                                         <p style='color: red; font-size: 14px;'> *Maksimal File Foto 2 MB</p>
                                     </div>
                                 </div>
@@ -146,7 +146,7 @@
 
 </html>
 <script type="text/javascript">
-    $('#lampiran').bind('change', function() {
+    $('#gambar').bind('change', function() {
         if (this.files[0].size > 2007200) // validasi ukuran size file
         {
             swal("Peringatan", "File harus maksimal 2 MB", "warning");
@@ -165,32 +165,33 @@
 </script>
 
 <script type="text/javascript">
+    //Proses Controller logic ajax
+
     $('#form-tambah').submit(function(e) {
 
-        // var error = 0;
-        // var message = "";
         var data = $(this).serialize();
-        console.log(data);
 
-        // if (error == 0) {
         $.ajax({
-            method: 'POST',
-            beforeSend: function() {
-                $(".loading2").show();
-                $(".loading2").modal('show');
-            },
-            url: '<?php echo site_url('Cuti/Cuti/prosesTambah'); ?>',
-            data: data,
-            success: function(data) {
-                // Use data for actions
-                if (data.status == 'berhasil')
-
-                {
+                beforeSend: function() {
+                    $(".loading2").show();
+                    $(".loading2").modal('show');
+                },
+                url: '<?php echo base_url(); ?>Cuti/Cuti/prosesTambah',
+                type: "post",
+                data: new FormData(this),
+                processData: false,
+                contentType: false,
+                cache: false,
+            })
+            .done(function(data) {
+                var result = jQuery.parseJSON(data);
+                if (result.status == 'berhasil') {
                     document.getElementById("form-tambah").reset();
                     $(".loading2").hide();
                     $(".loading2").modal('hide');
-                    setTimeout(location.reload.bind(location), 500);
                     save_berhasil();
+                    $("#slider").fadeOut("slow");
+                    setTimeout(location.reload.bind(location), 350);
 
                 } else
 
@@ -199,15 +200,10 @@
                     $(".loading2").hide();
                     $(".loading2").modal('hide');
                     gagal();
+                    $("#slider").fadeOut("slow");
+                    setTimeout(location.reload.bind(location), 350);
                 }
-            },
-        })
-
+            })
         e.preventDefault();
-        // } else {
-        //     console.log('ab');
-        //     swal("Peringatan", message, "warning");
-        //     return false;
-        // }
     });
 </script>
