@@ -36,7 +36,7 @@ class Cuti extends AUTH_Controller
     {
         $list = $this->M_cuti->get_data();
         $no = $_POST['start'];
-
+        // $datacuti = $list->num_rows();
         foreach ($list as $cuti) {
             $no++;
             $row = array();
@@ -51,7 +51,13 @@ class Cuti extends AUTH_Controller
             $row[] = $cuti->sisacuti;
             $row[] = $cuti->keperluan;
             $row[] = '<a href="' . base_url() . '' . $cuti->lampiran . '" target="_blank"><img class="img-thumbnail" src="' . base_url() . '' . $cuti->lampiran . '"   width="90" /></a>';
-            $row[] = '<small class="label pull-center bg-blue">' . $cuti->status . '</small">';
+            if ($cuti->status == "Approved") {
+                $Status = '<small class="label pull-center bg-blue">' . $cuti->status . '</small">';
+            } else {
+                $Status = '<small class="label pull-center bg-red">' . $cuti->status . '</small">';
+            }
+
+            $row[] = $Status;
             $row[] =  anchor('edit-cuti/' . $cuti->no_surat, ' <span class="fa fa-edit"></span> ', ' class="btn btn-sm btn-primary ajaxify klik " ') .
                 '  <button class="btn btn-sm btn-danger hapus-cuti" data-id=' . "'" . $cuti->no_surat . "'" . '><i class="glyphicon glyphicon-trash"></i></button> ' .
                 anchor('edit-cuti/' . $cuti->no_surat, ' <span class="fa fa-book"></span> ', ' class="btn btn-sm btn-primary ajaxify klik " ');
@@ -184,68 +190,68 @@ class Cuti extends AUTH_Controller
     public function prosesUpdate()
     {
 
-        $config['upload_path'] = "./upload/lampiran/";
-        $config['allowed_types'] = 'gif|jpg|png';
-        $config['max_size'] = '2048'; //maksimum besar file 2M
-        $config['overwrite'] = TRUE;
+        // $config['upload_path'] = "./upload/lampiran/";
+        // $config['allowed_types'] = 'gif|jpg|png';
+        // $config['max_size'] = '2048'; //maksimum besar file 2M
+        // $config['overwrite'] = TRUE;
 
-        $this->load->library('upload', $config);
+        // $this->load->library('upload', $config);
 
-        if ($this->upload->do_upload("gambar")) {
-            $image_data = $this->upload->data();
-            $path['link'] = "upload/lampiran/";
+        // if ($this->upload->do_upload("gambar")) {
+        // $image_data = $this->upload->data();
+        // $path['link'] = "upload/lampiran/";
 
-            $where = array(
-                'no_surat'            => $this->input->post('no_surat')
-            );
+        $where = array(
+            'no_surat'            => $this->input->post('no_surat')
+        );
 
-            $data = array(
-                'nama'            => $this->input->post('nama'),
-                'jabatan'            => $this->input->post('jabatan'),
-                'divisi'                    => $this->input->post('divisi'),
-                'tglcuti'           => $this->input->post('tglcuti'),
-                'selesai'           => $this->input->post('selesai'),
-                'jeniscuti'           => $this->input->post('jeniscuti'),
-                'sisacuti'                => $this->input->post('sisacuti'),
-                'keperluan'                    => $this->input->post('keperluan'),
-                'lampiran'            => $path['link'] . '' . $image_data['file_name'],
-                'status'                => $this->input->post('status')
-            );
+        $data = array(
+            // 'nama'            => $this->input->post('nama'),
+            // 'jabatan'            => $this->input->post('jabatan'),
+            // 'divisi'                    => $this->input->post('divisi'),
+            // 'tglcuti'           => $this->input->post('tglcuti'),
+            // 'selesai'           => $this->input->post('selesai'),
+            // 'jeniscuti'           => $this->input->post('jeniscuti'),
+            // 'sisacuti'                => $this->input->post('sisacuti'),
+            // 'keperluan'                    => $this->input->post('keperluan'),
+            // 'lampiran'            => $path['link'] . '' . $image_data['file_name'],
+            'status'                => $this->input->post('status')
+        );
 
-            $result = $this->M_cuti->update($data, $where);
+        $result = $this->M_cuti->update($data, $where);
 
-            if ($result > 0) {
-                $out['status'] = 'berhasil';
-            } else {
-                $out['status'] = 'gagal';
-            }
+        if ($result > 0) {
+            $out['status'] = 'berhasil';
         } else {
-
-            $where = array(
-                'no_surat'            => $this->input->post('no_surat')
-            );
-
-            $data = array(
-                'nama'            => $this->input->post('nama'),
-                'jabatan'            => $this->input->post('jabatan'),
-                'divisi'                    => $this->input->post('divisi'),
-                'tglcuti'           => $this->input->post('tglcuti'),
-                'selesai'           => $this->input->post('selesai'),
-                'jeniscuti'           => $this->input->post('jeniscuti'),
-                'sisacuti'                => $this->input->post('sisacuti'),
-                'keperluan'                    => $this->input->post('keperluan'),
-                'lampiran'            => 'upload/lampiran/avatar.png',
-                'status'                => $this->input->post('status')
-            );
-
-            $result = $this->M_cuti->update($data, $where);
-
-            if ($result > 0) {
-                $out['status'] = 'berhasil';
-            } else {
-                $out['status'] = 'gagal';
-            }
+            $out['status'] = 'gagal';
         }
+        // } else {
+
+        //     $where = array(
+        //         'no_surat'            => $this->input->post('no_surat')
+        //     );
+
+        //     $data = array(
+        //         'nama'            => $this->input->post('nama'),
+        //         'jabatan'            => $this->input->post('jabatan'),
+        //         'divisi'                    => $this->input->post('divisi'),
+        //         'tglcuti'           => $this->input->post('tglcuti'),
+        //         'selesai'           => $this->input->post('selesai'),
+        //         'jeniscuti'           => $this->input->post('jeniscuti'),
+        //         'sisacuti'                => $this->input->post('sisacuti'),
+        //         'keperluan'                    => $this->input->post('keperluan'),
+        //         'lampiran'            => 'upload/lampiran/avatar.png',
+        //         'status'                => $this->input->post('status')
+        //     );
+
+        //     $result = $this->M_cuti->update($data, $where);
+
+        //     if ($result > 0) {
+        //         $out['status'] = 'berhasil';
+        //     } else {
+        //         $out['status'] = 'gagal';
+        //     }
+        // }
 
         echo json_encode($out);
     }

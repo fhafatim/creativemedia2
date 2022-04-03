@@ -45,6 +45,7 @@
                                             'name' => 'no_surat',
                                             'class' => 'form-control',
                                             'value' => set_value('kode', $kode),
+                                            'readonly' => 'true',
                                         ]);
                                         ?>
                                     </div>
@@ -55,7 +56,7 @@
                                             *
                                         </font></label>
                                     <div class="col-sm-7">
-                                        <input type="text" class="form-control" placeholder="Nama Karyawan" name="nama" id="nama" aria-describedby="sizing-addon2" autocomplete="off" value="<?php echo $this->session->userdata("nama") ?>" readonly>
+                                        <input type="text" class="form-control" placeholder="Nama Karyawan" name="nama" id="nama" aria-describedby="sizing-addon2" autocomplete="off">
                                     </div>
                                 </div>
 

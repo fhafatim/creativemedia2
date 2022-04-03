@@ -97,7 +97,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="col-sm-2 control-label">Status Tentor</label>
+                            <label class="col-sm-2 control-label">Status Izin</label>
                             <div class="col-sm-3">
                                 <select name="status" class="form-control selek-status">
                                     <!-- <?php foreach ($datacuti as $data) { ?>
