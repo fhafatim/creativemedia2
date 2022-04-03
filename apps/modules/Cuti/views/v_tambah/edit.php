@@ -28,12 +28,12 @@
 
                 <!-- form start -->
                 <form class="form-horizontal" id="form-update" method="POST">
-
+                    <input type="hidden" name="no_surat" value="<?php echo $datacuti->no_surat; ?>">
                     <div class="box-body">
                         <div class="form-group">
                             <label for="inputEmail3" class="col-sm-2 control-label">No Surat</label>
                             <div class="col-sm-7">
-                                <input type="text" class="form-control" placeholder="no surat" name="no_surat" aria-describedby="sizing-addon2" value="<?php echo $datacuti->no_surat; ?>" readonly>
+                                <input type="text" class="form-control" placeholder="no surat" name="no_surat" value="<?php echo $datacuti->no_surat; ?>" readonly>
                             </div>
                         </div>
 
@@ -47,57 +47,52 @@
                         <div class="form-group">
                             <label for="inputEmail3" class="col-sm-2 control-label">Jabatan</label>
                             <div class="col-sm-7">
-                                <input type="text" class="form-control" placeholder="jabatan" name="jabatan" id="jabatan" aria-describedby="sizing-addon2" value="<?php echo $datacuti->jabatan; ?>">
+                                <input type="text" class="form-control" placeholder="jabatan" name="jabatan" id="jabatan" aria-describedby="sizing-addon2" value="<?php echo $datacuti->jabatan; ?>" readonly>
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label for="inputEmail3" class="col-sm-2 control-label">Divisi</label>
                             <div class="col-sm-7">
-                                <input type="text" class="form-control" placeholder="divisi" name="divisi" id="divisi" aria-describedby="sizing-addon2" value="<?php echo $datacuti->divisi; ?>">
+                                <input type="text" class="form-control" placeholder="divisi" name="divisi" id="divisi" aria-describedby="sizing-addon2" value="<?php echo $datacuti->divisi; ?>" readonly>
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Tgl Cuti</label>
                             <div class="col-sm-3">
-                                <input type="text" class="form-control" id="tglcuti" name="tglcuti" placeholder="Tanggal Cuti" aria-describedby="sizing-addon2" value="<?php echo $datacuti->tglcuti; ?>">
+                                <input type="text" class="form-control" id="tglcuti" name="tglcuti" placeholder="Tanggal Cuti" aria-describedby="sizing-addon2" value="<?php echo $datacuti->tglcuti; ?>" readonly>
                             </div>
                             <div class="col-sm-3">
-                                <input type="text" class="form-control" id="selesai" name="selesai" placeholder="Tanggal Selesai" aria-describedby="sizing-addon2" value="<?php echo $datacuti->selesai; ?>">
+                                <input type="text" class="form-control" id="selesai" name="selesai" placeholder="Tanggal Selesai" aria-describedby="sizing-addon2" value="<?php echo $datacuti->selesai; ?>" readonly>
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label for="inputEmail3" class="col-sm-2 control-label">Jenis Cuti</label>
                             <div class="col-sm-7">
-                                <input type="text" class="form-control" placeholder="jeniscuti" name="jeniscuti" id="jeniscuti" aria-describedby="sizing-addon2" value="<?php echo $datacuti->jeniscuti; ?>">
+                                <input type="text" class="form-control" placeholder="jeniscuti" name="jeniscuti" id="jeniscuti" aria-describedby="sizing-addon2" value="<?php echo $datacuti->jeniscuti; ?>" readonly>
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label for="inputEmail3" class="col-sm-2 control-label">Sisa Cuti</label>
                             <div class="col-sm-7">
-                                <input type="text" class="form-control" placeholder="sisacuti" name="sisacuti" id="sisacuti" aria-describedby="sizing-addon2" value="<?php echo $datacuti->sisacuti; ?>">
+                                <input type="text" class="form-control" placeholder="sisacuti" name="sisacuti" id="sisacuti" aria-describedby="sizing-addon2" value="<?php echo $datacuti->sisacuti; ?>" readonly>
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label for="inputEmail3" class="col-sm-2 control-label">Keperluan</label>
                             <div class="col-sm-7">
-                                <input type="text" class="form-control" placeholder="keperluan" name="keperluan" id="keperluan" aria-describedby="sizing-addon2" value="<?php echo $datacuti->keperluan; ?>">
+                                <input type="text" class="form-control" placeholder="keperluan" name="keperluan" id="keperluan" aria-describedby="sizing-addon2" value="<?php echo $datacuti->keperluan; ?>" readonly>
                             </div>
                         </div>
 
                         <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-2 control-label">Lampiran</label>
                             <div id="slider">
-                                <img class="img-thumbnail" id="output" src='../<?php echo $datacuti->lampiran; ?>' alt="your image" />
-                            </div>
-
-                            <label for="inputFoto" class="col-sm-2 control-label">Foto</label>
-                            <div class="col-sm-8">
-                                <input type="file" class="form-control" name="gambar" id="gambar" />
-                                <p style='color: red; font-size: 14px;'> *Maksimal File Foto 2 MB</p>
+                                <img class="img-thumbnail" id="output" src="<?php echo base_url($datacuti->lampiran); ?>" alt="your image" />
                             </div>
                         </div>
 
@@ -115,9 +110,9 @@
 										<?php } ?> -->
 
                                     <option></option>
-                                    <option value="Approved" <?= $datacuti->status == 'aktif' ? 'selected' : '' ?>>Approved
+                                    <option value="Approved" <?= $datacuti->status == 'Approved' ? 'selected' : '' ?>>Approved
                                     </option>
-                                    <option value="Reject" <?= $datacuti->status == 'tidak aktif' ? 'selected' : '' ?>>Reject
+                                    <option value="Reject" <?= $datacuti->status == 'Reject' ? 'selected' : '' ?>>Reject
                                     </option>
                                 </select>
                             </div>

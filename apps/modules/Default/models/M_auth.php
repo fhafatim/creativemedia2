@@ -1,9 +1,11 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class M_auth extends CI_Model {
-	
-	public function login($user, $pass) {
+class M_auth extends CI_Model
+{
+
+	public function login($user, $pass)
+	{
 		$this->db->select('');
 		$this->db->from('admin');
 		$this->db->where('username', $user);
@@ -23,29 +25,24 @@ class M_auth extends CI_Model {
 			$sessiondata['status']			= $result->status;
 			$this->session->set_userdata($sessiondata);
 			return $data->row();
-			
 		} else {
 			return false;
 		}
 	}
-	
-	
-	function update($id,$stat)
-    {
-        $data['status'] = $stat;
-        $this->db->where('id', $id);
-        $this->db->update('admin', $data);
-        return TRUE;
-    }
-	
-	function update_user($id,$data)
-    {
-        $this->db->where('id', $id);
-        $this->db->update('admin', $data);
-        return TRUE;
-    }
-	
-	
-	
-	
+
+
+	function update($id, $stat)
+	{
+		$data['status'] = $stat;
+		$this->db->where('id', $id);
+		$this->db->update('admin', $data);
+		return TRUE;
+	}
+
+	function update_user($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('admin', $data);
+		return TRUE;
+	}
 }

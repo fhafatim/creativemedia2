@@ -40,7 +40,7 @@ class M_cuti extends CI_Model
     {
         //$sql = "SELECT trainer.*, login.password FROM trainer, login WHERE trainer.nama=login.nama and id_trainer=$id";
         //$sql = "SELECT tbl_tentor.*, tbl_login.* FROM tbl_tentor JOIN tbl_login ON tbl_tentor.id_login = tbl_login.id_login WHERE tbl_tentor.id_tentor = $id";
-        $sql = "SELECT * from cuti where no_surat = {$id}";
+        $sql = "SELECT * from cuti where no_surat = '$id'";
         $data = $this->db->query($sql);
         return $data->row();
     }

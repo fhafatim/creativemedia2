@@ -4,7 +4,15 @@
     <div class="box">
         <div class="box-header">
             <div class="col-md-2">
-                <a class="klik ajaxify" href="<?php echo site_url('add-cuti'); ?>"><button class="btn btn-primary" data-toogle="modal" data-target="#examplemodal"><i class="glyphicon glyphicon-plus-sign"></i> Add Data</button></a>
+                <?php
+                $a = "SELECT a.add
+                 FROM menu_akses a left join tbl_menu b on a.id_menu=b.id_menu 
+                 where b.id_menu= '65' and a.grup_id= '" . $this->session->userdata('grup_id') . "'";
+                $cek = $this->db->query($a)->row_array();
+                if ($cek['add'] != 0) { ?>
+                    <a class="klik ajaxify" href="<?php echo site_url('add-cuti'); ?>"><button class="btn btn-primary" data-toogle="modal" data-target="#examplemodal"><i class="glyphicon glyphicon-plus-sign"></i> Add Data</button></a>
+                <?php } else {
+                } ?>
             </div>
         </div>
 
