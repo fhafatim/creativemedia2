@@ -28,11 +28,11 @@
                             <th>Nama</th>
                             <th>Jabatan</th>
                             <th>Divisi</th>
-                            <th>Tanggal Cuti</th>
-                            <th>Tanggal Berakhir Cuti</th>
+                            <th>Tgl Cuti</th>
+                            <th>Tgl Berakhir</th>
                             <th>Jenis Cuti</th>
                             <th>Sisa Cuti</th>
-                            <th>Keperluan</th>
+                            <th>Ket</th>
                             <th>Lampiran</th>
                             <th>Status</th>
                             <th style="width:125px;">Action</th>
